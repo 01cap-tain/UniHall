@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>UniHall</title>
+  </head>
+  <body>
+    <div class="header">
+      <nav class="navbar">
+        <div class="logo">
+          <img src="./images/UniHall.png" alt="" />
+        </div>
+        <div class="hamburger"></div>
+        <div class="navlists">
+          <ul class="navlinks">
+            <li>Home</li>
+            <li>Available Venues</li>
+            <li>Booked Venues</li>
+          </ul>
+        </div>
+      </nav>
+      <div class="hero">
+        <h1>Smart Venue Booking Made Simple</h1>
+        <p>
+          Choose from verified venues and secure your date without stress or
+          delay
+        </p>
+      </div>
+    </div>
+    <main>
+      <div class="buttons">
+        <button class="btn">Available venues</button>
+        <button class="btn">Booked venues</button>
+      </div>
+        
+       <section class="venue-carousel-section">
+        <div class="carousel-container">
+          <div class="carousel-wrapper">
+            <!-- Previous Button -->
+            <button class="carousel-btn prev-btn" aria-label="Previous venues">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </button>
+
+            <!-- Carousel Track -->
+            <div class="carousel-track">
+              <div class="venue-card">
+                <div class="venue-image">
+                  <img src="./images/images (1).jpeg" alt="FSLT1">
+                </div>
+                <div class="venue-info">
+                  <h3>FSLT1</h3>
+                  <a href="#" class="book-now-btn" data-venue="FSLT1">Book Now</a>
+                </div>
+              </div>
+
+              <div class="venue-card">
+                <div class="venue-image">
+                  <img src="./images/images (2).jpeg" alt="FSLT2">
+                </div>
+                <div class="venue-info">
+                  <h3>FSLT2</h3>
+                  <a href="#" class="book-now-btn" data-venue="FSLT2">Book Now</a>
+                </div>
+              </div>
+
+              <div class="venue-card">
+                <div class="venue-image">
+                  <img src="./images/images.jpeg" alt="Geo classroom">
+                </div>
+                <div class="venue-info">
+                  <h3>Geo classroom</h3>
+                  <a href="#" class="book-now-btn" data-venue="Geo classroom">Book Now</a>
+                </div>
+              </div>
+
+              <div class="venue-card">
+                <div class="venue-image">
+                  <img src="./images/image3.jpg" alt="Math classroom">
+                </div>
+                <div class="venue-info">
+                  <h3>Math classroom</h3>
+                  <a href="#" class="book-now-btn" data-venue="Math classroom">Book Now</a>
+                </div>
+              </div>
+
+              <div class="venue-card">
+                <div class="venue-image">
+                  <img src="./images/image4.jpg" alt="Chemistry classroom">
+                </div>
+                <div class="venue-info">
+                  <h3>Chemistry classroom</h3>
+                  <a href="#" class="book-now-btn" data-venue="Chemistry classroom">Book Now</a>
+                </div>
+              </div>
+
+              <div class="venue-card">
+                <div class="venue-image">
+                  <img src="./images/view-3d-school-desk.jpg" alt="Csc classroom">
+                </div>
+                <div class="venue-info">
+                  <h3>Csc classroom</h3>
+                  <a href="#" class="book-now-btn" data-venue="Csc classroom">Book Now</a>
+                </div>
+              </div>
+
+              <div class="venue-card">
+                <div class="venue-image">
+                  <img src="./images/school-classroom2.jpg" alt="Bio classroom">
+                </div>
+                <div class="venue-info">
+                  <h3>Bio classroom</h3>
+                  <a href="#" class="book-now-btn" data-venue="Bio classroom">Book Now</a>
+                </div>
+              </div>
+              <div class="venue-card">
+                <div class="venue-image">
+                  <img src="./images/mcb.jpeg" alt="MicroBiology classroom">
+                </div>
+                <div class="venue-info">
+                  <h3>MicroBiology classroom</h3>
+                  <a href="#" class="book-now-btn" data-venue="MicroBiology classroom">Book Now</a>
+                </div>
+              </div>
+              <div class="venue-card">
+                <div class="venue-image">
+                  <img src="./images/mcb.jpeg" alt="MicroBiology classroom">
+                </div>
+                <div class="venue-info">
+                  <h3>MicroBiology classroom</h3>
+                  <a href="#" class="book-now-btn" data-venue="MicroBiology classroom">Book Now</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Next Button -->
+            <button class="carousel-btn next-btn" aria-label="Next venues">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Carousel Dots -->
+          <div class="carousel-dots"></div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Booking Modal -->
+    <div id="bookingModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Book <span id="selectedVenue"></span></h2>
+
+        <form id="bookingForm">
+          <div class="form-group">
+            <label for="department">Your Department:</label>
+            <input
+              type="text"
+              id="department"
+              placeholder="e.g. Computer Science"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="bookingDate">Booking Date:</label>
+            <input type="date" id="bookingDate" required />
+          </div>
+
+          <div class="form-group">
+            <label for="bookingTime">Booking Time:</label>
+            <input type="time" id="bookingTime" required />
+          </div>
+
+          <button type="submit" class="btn submit-btn">Confirm Booking</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="./main.js"></script>
+  </body>
+</html>
