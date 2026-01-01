@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="bootstrap-4.6.2-dist/css/bootstrap.min.css">
+    <title>Posts</title>
+</head>
+
+<body>
+
+    <div class="container mt-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2>Posts</h2>
+            <div>
+                <button id="btn-logout" class="btn btn-sm btn-outline-secondary">Logout</button>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Create Post</h5>
+                <form id="createPostForm">
+                    <div class="form-group">
+                        <input type="text" id="postTitle" class="form-control" placeholder="Title">
+                    </div>
+                    <div class="form-group mt-2">
+                        <textarea id="postContent" class="form-control" rows="3" placeholder="Content"></textarea>
+                    </div>
+                    <button class="btn btn-primary mt-2">Create</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="postsList"></div>
+    </div>
+
+    <script src="jquery-3.6.0.min.js"></script>
+    <script src="bootstrap-4.6.2-dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const apiBase = 'http://127.0.0.1:8000/api';
+
+        function getToken() {
+            return localStorage.getItem('api_token');
+        }
+
+        function getUserId() {
+            return localStorage.getItem('user_id');
+        }
+
+        function authHeaders() {
+            const token = getToken();
+            const headers = { 'Content-Type': 'application/json' };
+            if (token) headers['Authorization'] = 'Bearer ' + token;
+            return headers;
+        }
+
+        function fetchPosts() {
+            $('#postsList').html('Loading...');
+            $.ajax({
+                url: apiBase + '/post',
+                method: 'GET',
+
+                headers: authHeaders(),
+                success(data) {
+                    renderPosts(data);
+                },
+                error() {
+                    $('#postsList').html('<div class="alert alert-danger">Failed to load posts</div>');
+                }
+            });
+        }
+
+        function renderPosts(posts) {
+            if (!posts || posts.length === 0) {
+                $('#postsList').html('<div class="alert alert-info">No posts yet</div>');
+                return;
+            }
+
+            const list = $('<div></div>');
+            posts.forEach(post => {
+                const card = $(
+                    `<div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title"></h5>
+                            <p class="card-text"></p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">By <span class="post-user"></span></small>
+                                <div>
+                                    <button class="btn btn-sm btn-outline-primary btn-like">Like</button>
+                                    <span class="ml-2 likes-count"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`
+                );
+
+                card.find('.card-title').text(post.title);
+                card.find('.card-text').text(post.content);
+                card.find('.post-user').text(post.user_id || 'Unknown');
+                card.find('.btn-like').attr('data-id', post.id);
+                card.find('.likes-count').text('...');
+
+                // get likes count
+                $.ajax({
+                    url: apiBase + '/post/' + post.id + '/like',
+                    method: 'POST',
+                    headers: authHeaders(),
+                    success(cnt) {
+                        card.find('.likes-count').text(cnt.post_count + ' likes');
+                    },
+                    error() {
+                        card.find('.likes-count').text('0 likes');
+                    }
+                });
+
+                list.append(card);
+            });
+
+            $('#postsList').empty().append(list);
+        }
+
+        $(function () {
+            fetchPosts();
+
+            $('#createPostForm').on('submit', function (e) {
+                e.preventDefault();
+
+                const payload = {
+                    title: $('#postTitle').val(),
+                    content: $('#postContent').val(),
+                    user_id: getUserId(),
+                };
+
+                $.ajax({
+                    url: apiBase + '/post',
+                    method: 'POST',
+                    headers: authHeaders(),
+                    data: JSON.stringify(payload),
+                    success() {
+                        $('#postTitle').val('');
+                        $('#postContent').val('');
+                        fetchPosts();
+                    },
+                    error(xhr) {
+                        const msg = xhr.responseJSON && xhr.responseJSON.message ? xhr.responseJSON.message : 'Create post failed';
+                        alert(msg);
+                    }
+                });
+            });
+
+            $(document).on('click', '.btn-like', function () {
+                const postId = $(this).attr('data-id');
+
+                const payload = { user_id: getUserId() };
+
+                $.ajax({
+                    url: apiBase + '/post/' + postId + '/like',
+                    method: 'POST',
+                    headers: authHeaders(),
+                    contentType: 'application/json',
+                    data: JSON.stringify(payload),
+                    success() {
+                        fetchPosts();
+                    },
+                    error(xhr) {
+                        const msg = xhr.responseJSON && xhr.responseJSON.message ? xhr.responseJSON.message : 'Like failed';
+                        alert(msg);
+                    }
+                });
+            });
+
+            $('#btn-logout').on('click', function () {
+                $.ajax({
+                    url: apiBase + '/logout',
+                    method: 'POST',
+                    headers: authHeaders(),
+                    contentType: 'application/json',
+                    success() {
+                        localStorage.removeItem('api_token');
+                        localStorage.removeItem('user');
+                        localStorage.removeItem('user_id');
+                        alert('Logged out');
+                        location.href = 'index.html'
+                    },
+                    error(xhr) {
+                        const msg = xhr.responseJSON && xhr.responseJSON.message ? xhr.responseJSON.message : 'Like failed';
+                        alert(msg);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

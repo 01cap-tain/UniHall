@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="bootstrap-4.6.2-dist/css/bootstrap.min.css">
+    <title>Blog</title>
+</head>
+
+<body>
+
+    <div class="mx-auto" style="max-width: 500px;">
+        <h2 class="mt-5 mb-4">Login</h2>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="email">Email_address</label>
+                <input type="text" name="email_address" id="email_address" class="form-control" placeholder="Joe@gmail.com">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" class="form-control" placeholder="Password">
+            </div>
+            <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+    </div>
+
+    <script src="jquery-3.7.1.min.js"></script>
+    <script src="bootstrap-4.6.2-dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        $(function() {
+            $('#loginForm').on('submit', function(e) {
+                e.preventDefault();
+
+                const payload = {
+                    email: $('#email_address').val(),
+                    password: $('#password').val(),
+                };
+
+                // update this to your API base URL if needed
+                const apiBase = 'http://127.0.0.1:8000/api';
+
+                $.ajax({
+                    url: apiBase + '/login',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(payload),
+                    success(data) {
+                        if (data.token) {
+                            localStorage.setItem('match_token', data.token);
+                        }
+                        if (data.user) {
+                            localStorage.setItem('user', JSON.stringify(data.user));     
+                            localStorage.setItem('user_id', data.user.id);
+                        }
+                        alert(data.message || 'Login successful');
+                        // optional: redirect to another page (e.g., post.html)
+                        location.href = 'post.html';
+                    },
+                    error(xhr) {
+                        const msg = xhr.responseJSON && xhr.responseJSON.message ? xhr.responseJSON.message : 'Login failed';
+                        alert(msg);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

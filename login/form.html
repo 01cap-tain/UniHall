@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form</title>
+  <link rel="stylesheet" href="bootstrap-4.6.2-dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="font-awesome(4.7.0)/css/font-awesome.min.css">
+</head>
+
+<style>
+  .form-outer {
+    min-height: 100vh;
+    background-color: rgb(234, 235, 236);
+  }
+
+  .form-inner {
+    width: 100%;
+    max-width: 500px;
+  }
+</style>
+
+<body>
+
+  <div class="form-outer d-flex justify-content-center align-items-center px-3 py-3 pt-5 pb-5">
+    <div class="form-inner bg-white p-md-5 rounded">
+
+      <h2 class="font-weight-normal text-center text-dark mt-3 mb-4">Sign Up Here</h2>
+
+      <p class="text-center text-dark lead font-weight-bold">Please input details below</p>
+
+      <form id="registerForm">
+        <div class="form-group font-weight-bold">
+          <label for="first_name">First Name</label>
+          <input type="text" name="first_name" id="first_name" class="form-control" placeholder="John">
+        </div>
+
+        <div class="form-group font-weight-bold">
+          <label for="last_name">Last Name</label>
+          <input type="text" name="last_name" id="last_name" class="form-control" placeholder="Doe">
+        </div>
+
+        <div class="form-group font-weight-bold">
+          <label for="last_name">Matric Number</label>
+          <input type="text" name="matric_number" id="matric_number" class="form-control" placeholder="Sci22csc999">
+        </div>
+
+        <div class="form-group font-weight-bold">
+          <label for="Username">Email</label>
+          <input type="text" name="email" id="email" class="form-control" placeholder="email@gmail.com">
+        </div>
+
+        <div class="form-group font-weight-bold mb-4">
+          <label for="pwd">Password</label>
+          <input type="password" name="password" id="password" class="form-control" placeholder="Enter password">
+        </div>
+        <!-- <div class="d-flex justify-content-between align-items-center my-3">
+
+          <div class="form-check  mb-0 font-weight-normal">
+            <label class="form-check-label">
+              <input type="checkbox" class="form-check-input" value="">
+              Remember me for 30 days
+            </label>
+          </div>
+
+          <div>
+            <p class="text-center mb-0">Forgot password <a href="" class="text-info">Click here</a></p>
+          </div>
+
+        </div> -->
+
+        <button type="submit" class="btn btn-primary btn-block mb-3">Register</button>
+
+      </form>
+      <!-- 
+      <div class="g-sign flex-fill border rounded p-1 text-center shadow-lg">
+        <img src="images/google logo.png" alt="gooogle logo" style="width: 30px;">
+        <a href="" class="text-dark text-decoration-none">Sign in with google</a>
+      </div> -->
+
+      <p class="text-center mt-3 text-secondary">Already have an account <a href="login.html">login here</a> </p>
+    </div>
+
+  </div>
+
+
+  <script src="bootstrap-4.6.2-dist/js/bootstrap.min.js"></script>
+
+  <script src="jquery-3.7.1.min.js"></script>
+
+  <script>
+    $(function () {
+      $('#registerForm').on('submit', function (e) {
+        e.preventDefault();
+
+        const payload = {
+          first_name: $('#first_name').val(),
+          last_name: $('#last_name').val(),
+          matric_number: $('#matric_number').val(),
+          password: $('#password').val(),
+          email: $('#email').val(),
+        };
+
+        const apiBase = 'http://127.0.0.1:8000/api';
+
+        $.ajax({
+          url: apiBase + '/register',
+          method: 'POST',
+          contentType: 'application/json',
+          data: JSON.stringify(payload),
+          success(data) {
+            if (data.token) {
+              localStorage.setItem('match_token', data.token);
+            }
+            if (data.user) {
+              localStorage.setItem('user', JSON.stringify(data.user));
+              localStorage.setItem('user_id', data.user.id);
+            }
+            alert('Registration successful');
+            // optional: redirect to login
+
+            location.href = 'post.html';
+          },
+          error(xhr) {
+            const msg = xhr.responseJSON && xhr.responseJSON.message ? xhr.responseJSON.message : 'Registration failed';
+            alert(msg);
+          }
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>
