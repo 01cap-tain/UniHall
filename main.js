@@ -1,3 +1,28 @@
+// // Hamburger Menu Toggle
+// const hamburger = document.querySelector('.hamburger');
+// const navlists = document.querySelector('.navlists');
+
+// // Create hamburger spans
+// hamburger.innerHTML = '<span></span>';
+
+// hamburger.addEventListener('click', () => {
+//   hamburger.classList.toggle('active');
+//   navlists.classList.toggle('active');
+// });
+
+const hamburger = document.getElementById('hamburger');
+const hamburgerList = document.querySelector('.hamburgerlist');
+const hamLinks = document.querySelector('.hamlinks');
+const closebtn = document.getElementById('close');
+
+hamburger.addEventListener('click', ()=>{
+  hamburgerList.style.display= 'block';
+  hamLinks.style.display = "flex"
+})
+closebtn.addEventListener('click', ()=>{
+    hamburgerList.style.display= 'none';
+  hamLinks.style.display = "none"
+})
 
 // Carousel functionality
 const carouselTrack = document.querySelector('.carousel-track');

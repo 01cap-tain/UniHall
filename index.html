@@ -12,9 +12,19 @@
         <div class="logo">
           <img src="./images/UniHall.png" alt="" />
         </div>
-        <div class="hamburger"></div>
+        <div class="hamburger" id="hamburger">
+          <img src="./images/icon-hamburger.svg" alt="hamburger">
+        </div>
         <div class="navlists">
           <ul class="navlinks">
+            <li>Home</li>
+            <li>Available Venues</li>
+            <li>Booked Venues</li>
+          </ul>
+        </div>
+        <div class="hamburgerlist">
+          <ul class="hamlinks">
+            <img src="./images/close.png" alt="close" id="close">
             <li>Home</li>
             <li>Available Venues</li>
             <li>Booked Venues</li>
@@ -31,17 +41,22 @@
     </div>
     <main>
       <div class="buttons">
-        <button class="btn">Available venues</button>
-        <button class="btn">Booked venues</button>
+        <button class="btn one">Available venues</button>
+        <button class="btn two">Booked venues</button>
       </div>
-        
-       <section class="venue-carousel-section">
+
+      <section class="venue-carousel-section">
         <div class="carousel-container">
           <div class="carousel-wrapper">
             <!-- Previous Button -->
             <button class="carousel-btn prev-btn" aria-label="Previous venues">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <path
+                  d="M15 18l-6-6 6-6"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
               </svg>
             </button>
 
@@ -49,89 +64,122 @@
             <div class="carousel-track">
               <div class="venue-card">
                 <div class="venue-image">
-                  <img src="./images/images (1).jpeg" alt="FSLT1">
+                  <img src="./images/images (1).jpeg" alt="FSLT1" />
                 </div>
                 <div class="venue-info">
                   <h3>FSLT1</h3>
-                  <a href="#" class="book-now-btn" data-venue="FSLT1">Book Now</a>
+                  <a href="#" class="book-now-btn" data-venue="FSLT1"
+                    >Book Now</a
+                  >
                 </div>
               </div>
 
               <div class="venue-card">
                 <div class="venue-image">
-                  <img src="./images/images (2).jpeg" alt="FSLT2">
+                  <img src="./images/images (2).jpeg" alt="FSLT2" />
                 </div>
                 <div class="venue-info">
                   <h3>FSLT2</h3>
-                  <a href="#" class="book-now-btn" data-venue="FSLT2">Book Now</a>
+                  <a href="#" class="book-now-btn" data-venue="FSLT2"
+                    >Book Now</a
+                  >
                 </div>
               </div>
 
               <div class="venue-card">
                 <div class="venue-image">
-                  <img src="./images/images.jpeg" alt="Geo classroom">
+                  <img src="./images/images.jpeg" alt="Geo classroom" />
                 </div>
                 <div class="venue-info">
                   <h3>Geo classroom</h3>
-                  <a href="#" class="book-now-btn" data-venue="Geo classroom">Book Now</a>
+                  <a href="#" class="book-now-btn" data-venue="Geo classroom"
+                    >Book Now</a
+                  >
                 </div>
               </div>
 
               <div class="venue-card">
                 <div class="venue-image">
-                  <img src="./images/image3.jpg" alt="Math classroom">
+                  <img src="./images/image3.jpg" alt="Math classroom" />
                 </div>
                 <div class="venue-info">
                   <h3>Math classroom</h3>
-                  <a href="#" class="book-now-btn" data-venue="Math classroom">Book Now</a>
+                  <a href="#" class="book-now-btn" data-venue="Math classroom"
+                    >Book Now</a
+                  >
                 </div>
               </div>
 
               <div class="venue-card">
                 <div class="venue-image">
-                  <img src="./images/image4.jpg" alt="Chemistry classroom">
+                  <img src="./images/image4.jpg" alt="Chemistry classroom" />
                 </div>
                 <div class="venue-info">
                   <h3>Chemistry classroom</h3>
-                  <a href="#" class="book-now-btn" data-venue="Chemistry classroom">Book Now</a>
+                  <a
+                    href="#"
+                    class="book-now-btn"
+                    data-venue="Chemistry classroom"
+                    >Book Now</a
+                  >
                 </div>
               </div>
 
               <div class="venue-card">
                 <div class="venue-image">
-                  <img src="./images/view-3d-school-desk.jpg" alt="Csc classroom">
+                  <img
+                    src="./images/view-3d-school-desk.jpg"
+                    alt="Csc classroom"
+                  />
                 </div>
                 <div class="venue-info">
                   <h3>Csc classroom</h3>
-                  <a href="#" class="book-now-btn" data-venue="Csc classroom">Book Now</a>
+                  <a href="#" class="book-now-btn" data-venue="Csc classroom"
+                    >Book Now</a
+                  >
                 </div>
               </div>
 
               <div class="venue-card">
                 <div class="venue-image">
-                  <img src="./images/school-classroom2.jpg" alt="Bio classroom">
+                  <img
+                    src="./images/school-classroom2.jpg"
+                    alt="Bio classroom"
+                  />
                 </div>
                 <div class="venue-info">
                   <h3>Bio classroom</h3>
-                  <a href="#" class="book-now-btn" data-venue="Bio classroom">Book Now</a>
+                  <a href="#" class="book-now-btn" data-venue="Bio classroom"
+                    >Book Now</a
+                  >
                 </div>
               </div>
               <div class="venue-card">
                 <div class="venue-image">
-                  <img src="./images/mcb.jpeg" alt="MicroBiology classroom">
+                  <img src="./images/mcb.jpeg" alt="MicroBiology classroom" />
                 </div>
                 <div class="venue-info">
                   <h3>MicroBiology classroom</h3>
-                  <a href="#" class="book-now-btn" data-venue="MicroBiology classroom">Book Now</a>
+                  <a
+                    href="#"
+                    class="book-now-btn"
+                    data-venue="MicroBiology classroom"
+                    >Book Now</a
+                  >
                 </div>
               </div>
               <div class="venue-card">
                 <div class="venue-image">
-                  <img src="./images/mcb.jpeg" alt="MicroBiology classroom">
+                  <img src="./images/mcb.jpeg" alt="MicroBiology classroom" />
                 </div>
                 <div class="venue-info">
                   <h3>MicroBiology classroom</h3>
-                  <a href="#" class="book-now-btn" data-venue="MicroBiology classroom">Book Now</a>
+                  <a
+                    href="#"
+                    class="book-now-btn"
+                    data-venue="MicroBiology classroom"
+                    >Book Now</a
+                  >
                 </div>
               </div>
             </div>
@@ -139,7 +187,12 @@
             <!-- Next Button -->
             <button class="carousel-btn next-btn" aria-label="Next venues">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <path
+                  d="M9 18l6-6-6-6"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
               </svg>
             </button>
           </div>
