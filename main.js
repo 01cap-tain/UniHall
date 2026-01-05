@@ -24,6 +24,19 @@ closebtn.addEventListener('click', ()=>{
   hamLinks.style.display = "none"
 })
 
+//btn background
+const availableBtn = document.getElementById('availableBtn');
+const bookedBtn = document.getElementById('bookedBtn');
+
+availableBtn.addEventListener('click', ()=>{
+  availableBtn.classList.add('active');
+  bookedBtn.classList.remove('active');
+})
+
+bookedBtn.addEventListener('click', ()=>{
+  bookedBtn.classList.add('active');
+  availableBtn.classList.remove('active');
+})
 // Carousel functionality
 const carouselTrack = document.querySelector('.carousel-track');
 const prevBtn = document.querySelector('.prev-btn');

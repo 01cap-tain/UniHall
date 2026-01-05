@@ -113,7 +113,7 @@ section {
   cursor: pointer;
 }
 
-.btn:hover{
+.active{
   background: var(--blueshade);
   color: var(--secondary-color);
   border-radius: 999px;
@@ -389,6 +389,11 @@ section {
   .venue-card {
     width: 48%;
   }
+  .active{
+  background: var(--blueshade);
+  color: var(--secondary-color);
+  border-radius: 999px;
+}
 }
 
 @media (max-width: 768px) {
@@ -398,6 +403,9 @@ section {
   }
   .header{
     height: 80vh;
+    background-position: center;
+    background-size: cover;
+
   }
   .navbar{
     justify-content: space-between;
@@ -427,6 +435,11 @@ section {
   font-size: 16px;
   cursor: pointer;
  }
+ .active{
+  background: var(--blueshade);
+  color: var(--secondary-color);
+  border-radius: 999px;
+}
   .hero h1 {
     font-size: 2rem;
   }
@@ -485,6 +498,11 @@ section {
   font-size: 16px;
   cursor: pointer;
  }
+ .active{
+  background: var(--blueshade);
+  color: var(--secondary-color);
+  border-radius: 999px;
+}
   .carousel-container{
     width: 100%;
     padding: 0%;
